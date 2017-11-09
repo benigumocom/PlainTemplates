@@ -61,20 +61,20 @@ class AdmobAdsActivity : AppCompatActivity() {
   private fun newInterstitialAd(): InterstitialAd {
     val interstitialAd = InterstitialAd(this)
     interstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id))
-    interstitialAd.setAdListener(object : AdListener() {
-      fun onAdLoaded() {
+    interstitialAd.adListener = object : AdListener() {
+      override fun onAdLoaded() {
         mNextLevelButton!!.isEnabled = true
       }
 
-      fun onAdFailedToLoad(errorCode: Int) {
+      override fun onAdFailedToLoad(errorCode: Int) {
         mNextLevelButton!!.isEnabled = true
       }
 
-      fun onAdClosed() {
+      override fun onAdClosed() {
         // Proceed to the next level.
         goToNextLevel()
       }
-    })
+    }
     return interstitialAd
   }
 
